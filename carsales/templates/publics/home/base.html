@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include  'publics/home/includes/_head.html' %}
+    {% comment %} <script src="{% url 'javascript_catalog' %}"></script> {% endcomment %}
+</head>
+<body class="bg-gray-50">
+    <main class="p-4 md:p-8" id="mainContent">
+
+    {% include 'publics/home/includes/_navbar.html' %}
+    </main>
+
+    {% block content %}{% endblock %}
+    
+    <!-- Footer -->
+    {% include 'publics/home/includes/_footer.html' %}
+
+    {% include 'publics/home/includes/_js.html' %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        // Sample car data
+        const cars = {
+            1: {
+                title: "BMW M5 Competition",
+                image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                price: "$89,999",
+                status: "For Sale",
+                year: "2022",
+                mileage: "12,345 mi",
+                description: "The BMW M5 Competition combines luxury sedan comfort with supercar performance. With a 4.4L V8 engine producing 617 horsepower, this vehicle delivers exhilarating acceleration while maintaining everyday usability. Features include premium leather interior, advanced driver assistance systems, and state-of-the-art infotainment.",
+                length: "196.4 in",
+                width: "74.9 in",
+                height: "57.8 in",
+                weight: "4,345 lbs",
+                engine: "4.4L V8 Twin-Turbo",
+                transmission: "8-Speed Automatic",
+                fuel: "Petrol",
+                drivetrain: "All-Wheel Drive"
+            },
+            2: {
+                title: "Mercedes G-Class",
+                image: "https://images.unsplash.com/photo-1563720223485-405d5aaadf5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                price: "$199/day",
+                status: "For Rent",
+                year: "2023",
+                mileage: "8,120 mi",
+                description: "The iconic Mercedes G-Class combines rugged off-road capability with luxurious comfort. With its boxy design and premium interior, it's the perfect vehicle for both city driving and outdoor adventures. Features include three locking differentials, adaptive suspension, and the latest MBUX infotainment system.",
+                length: "189.7 in",
+                width: "73.5 in",
+                height: "76.9 in",
+                weight: "5,724 lbs",
+                engine: "4.0L V8 Biturbo",
+                transmission: "9-Speed Automatic",
+                fuel: "Diesel",
+                drivetrain: "All-Wheel Drive"
+            },
+            3: {
+                title: "Audi e-tron GT",
+                image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+                price: "$109,999",
+                status: "For Sale",
+                year: "2023",
+                mileage: "5,430 mi",
+                description: "The Audi e-tron GT is a fully electric grand tourer that combines stunning design with impressive performance. With up to 522 horsepower and a range of 238 miles, it offers a thrilling driving experience without emissions. Features include a premium Bang & Olufsen sound system, virtual cockpit plus, and advanced driver assistance systems.",
+                length: "196.5 in",
+                width: "77.3 in",
+                height: "55.5 in",
+                weight: "5,139 lbs",
+                engine: "Dual Electric Motors",
+                transmission: "2-Speed Automatic",
+                fuel: "Electric",
+                drivetrain: "All-Wheel Drive"
+            }
+        };
+
+        // Function to show car details
+        function showCarDetails(carId) {
+            const car = cars[carId];
+            document.getElementById('detailCarTitle').textContent = car.title;
+            document.getElementById('detailCarImage').src = car.image;
+            document.getElementById('detailCarPrice').textContent = car.price;
+            document.getElementById('detailCarStatus').textContent = car.status;
+            document.getElementById('detailCarYear').textContent = car.year;
+            document.getElementById('detailCarMileage').textContent = car.mileage;
+            document.getElementById('detailCarDescription').textContent = car.description;
+            document.getElementById('detailCarLength').textContent = car.length;
+            document.getElementById('detailCarWidth').textContent = car.width;
+            document.getElementById('detailCarHeight').textContent = car.height;
+            document.getElementById('detailCarWeight').textContent = car.weight;
+            document.getElementById('detailCarEngine').textContent = car.engine;
+            document.getElementById('detailCarTransmission').textContent = car.transmission;
+            document.getElementById('detailCarFuel').textContent = car.fuel;
+            document.getElementById('detailCarDrivetrain').textContent = car.drivetrain;
+            
+            document.getElementById('carDetails').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Function to hide car details
+        function hideCarDetails() {
+            document.getElementById('carDetails').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Function to change car view
+        function changeCarView(view) {
+            // Remove active class from all thumbnails
+            const thumbnails = document.querySelectorAll('.car-view-thumbnail');
+            thumbnails.forEach(thumb => {
+                thumb.classList.remove('active');
+                thumb.classList.add('border-gray-200');
+                thumb.classList.remove('border-blue-500');
+            });
+            
+            // Add active class to clicked thumbnail
+            event.currentTarget.classList.add('active');
+            event.currentTarget.classList.remove('border-gray-200');
+            event.currentTarget.classList.add('border-blue-500');
+            
+            // In a real application, you would change the main image here
+            // For this demo, we'll just show an alert
+            alert(`Switching to ${view} view. In a real application, this would change the main image.`);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('carDetails').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideCarDetails();
+            }
+        });
+    </script>
+</body>
+</html>
