@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,17 +37,6 @@
             background-size: cover;
             background-position: center;
         }
-        .dimension-view {
-            transition: all 0.5s ease;
-        }
-        .dimension-label {
-            background: rgba(37, 99, 235, 0.8);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.875rem;
-            position: absolute;
-        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -58,10 +46,10 @@
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
                     <i class="fas fa-car text-blue-600 text-2xl mr-2"></i>
-                    <a href="index.html" class="text-2xl font-bold text-gray-800">AutoPrime</a>
+                    <h1 class="text-2xl font-bold text-gray-800">AutoPrime</h1>
                 </div>
                 <nav class="hidden md:flex space-x-8">
-                    <a href="index.html" class="text-blue-600 font-medium border-b-2 border-blue-600">Home</a>
+                    <a href="#" class="text-blue-600 font-medium border-b-2 border-blue-600">Home</a>
                     <a href="#cars-section" class="text-gray-600 hover:text-blue-600 font-medium">Cars</a>
                     <a href="#" class="text-gray-600 hover:text-blue-600 font-medium">Rentals</a>
                     <a href="#" class="text-gray-600 hover:text-blue-600 font-medium">Sell</a>
@@ -77,232 +65,200 @@
         </div>
     </header>
 
-    <!-- Homepage Content (initially visible) -->
-    <div id="homepage">
-        <!-- Homepage Hero Section -->
-        <section class="hero-section text-white py-20">
-            <div class="container mx-auto px-4 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold mb-6">Find Your Perfect Car</h1>
-                <p class="text-xl mb-8 max-w-2xl mx-auto">Discover our premium collection of vehicles for sale and rental. Quality, reliability, and exceptional service guaranteed.</p>
-                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#cars-section" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition text-center">Browse Cars</a>
-                    <button class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">Learn More</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Why Choose AutoPrime?</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="text-center p-6">
-                        <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-shield-alt text-blue-600 text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Quality Guaranteed</h3>
-                        <p class="text-gray-600">All our vehicles undergo rigorous inspection and certification processes.</p>
-                    </div>
-                    <div class="text-center p-6">
-                        <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-tag text-blue-600 text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Best Prices</h3>
-                        <p class="text-gray-600">Competitive pricing with flexible payment options for both sales and rentals.</p>
-                    </div>
-                    <div class="text-center p-6">
-                        <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
-                            <i class="fas fa-headset text-blue-600 text-2xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">24/7 Support</h3>
-                        <p class="text-gray-600">Our customer service team is available around the clock to assist you.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Cars Section -->
-        <section id="cars-section" class="py-16 bg-gray-50">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-800">Featured Vehicles</h2>
-                        <p class="text-gray-600 mt-2">Explore our premium selection of cars for sale and rental</p>
-                    </div>
-                    <div class="mt-4 md:mt-0 flex space-x-4">
-                        <select class="bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option>All Brands</option>
-                            <option>BMW</option>
-                            <option>Mercedes</option>
-                            <option>Audi</option>
-                            <option>Toyota</option>
-                        </select>
-                        <select class="bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option>Price: Low to High</option>
-                            <option>Price: High to Low</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Car Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                    <!-- Car Card 1 -->
-                    <div class="car-card bg-white rounded-xl shadow-md overflow-hidden">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="BMW M5" class="w-full h-48 object-cover">
-                            <span class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">For Sale</span>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="text-xl font-bold text-gray-800">BMW M5 Competition</h3>
-                                    <p class="text-gray-600">2022 • Sedan</p>
-                                </div>
-                                <span class="text-2xl font-bold text-blue-600">$89,999</span>
-                            </div>
-                            <div class="flex mt-4 text-gray-500">
-                                <div class="flex items-center mr-4">
-                                    <i class="fas fa-tachometer-alt mr-2"></i>
-                                    <span>12,345 mi</span>
-                                </div>
-                                <div class="flex items-center mr-4">
-                                    <i class="fas fa-gas-pump mr-2"></i>
-                                    <span>Petrol</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-cogs mr-2"></i>
-                                    <span>Automatic</span>
-                                </div>
-                            </div>
-                            <div class="mt-6 flex space-x-3">
-                                <a href="car-details.html?car=1" class="flex-1 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition text-center">View Details</a>
-                                <button class="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Car Card 2 -->
-                    <div class="car-card bg-white rounded-xl shadow-md overflow-hidden">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1563720223485-405d5aaadf5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Mercedes G-Class" class="w-full h-48 object-cover">
-                            <span class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">For Rent</span>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="text-xl font-bold text-gray-800">Mercedes G-Class</h3>
-                                    <p class="text-gray-600">2023 • SUV</p>
-                                </div>
-                                <span class="text-2xl font-bold text-blue-600">$199/day</span>
-                            </div>
-                            <div class="flex mt-4 text-gray-500">
-                                <div class="flex items-center mr-4">
-                                    <i class="fas fa-tachometer-alt mr-2"></i>
-                                    <span>8,120 mi</span>
-                                </div>
-                                <div class="flex items-center mr-4">
-                                    <i class="fas fa-gas-pump mr-2"></i>
-                                    <span>Diesel</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-cogs mr-2"></i>
-                                    <span>Automatic</span>
-                                </div>
-                            </div>
-                            <div class="mt-6 flex space-x-3">
-                                <a href="car-details.html?car=2" class="flex-1 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition text-center">View Details</a>
-                                <button class="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Car Card 3 -->
-                    <div class="car-card bg-white rounded-xl shadow-md overflow-hidden">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Audi e-tron" class="w-full h-48 object-cover">
-                            <span class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">For Sale</span>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="text-xl font-bold text-gray-800">Audi e-tron GT</h3>
-                                    <p class="text-gray-600">2023 • Electric</p>
-                                </div>
-                                <span class="text-2xl font-bold text-blue-600">$109,999</span>
-                            </div>
-                            <div class="flex mt-4 text-gray-500">
-                                <div class="flex items-center mr-4">
-                                    <i class="fas fa-tachometer-alt mr-2"></i>
-                                    <span>5,430 mi</span>
-                                </div>
-                                <div class="flex items-center mr-4">
-                                    <i class="fas fa-bolt mr-2"></i>
-                                    <span>Electric</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-cogs mr-2"></i>
-                                    <span>Automatic</span>
-                                </div>
-                            </div>
-                            <div class="mt-6 flex space-x-3">
-                                <a href="car-details.html?car=3" class="flex-1 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition text-center">View Details</a>
-                                <button class="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <button class="bg-white border border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-blue-50 transition">View All Vehicles</button>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Car Details Page (initially hidden) -->
-    <div id="car-details-page" class="hidden">
-        <!-- Breadcrumb -->
-        <div class="bg-gray-100 py-4">
-            <div class="container mx-auto px-4">
-                <nav class="flex" aria-label="Breadcrumb">
-                    <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                        <li class="inline-flex items-center">
-                            <a href="index.html" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
-                                <i class="fas fa-home mr-2"></i>
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <div class="flex items-center">
-                                <i class="fas fa-chevron-right text-gray-400"></i>
-                                <a href="#cars-section" class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2">Cars</a>
-                            </div>
-                        </li>
-                        <li aria-current="page">
-                            <div class="flex items-center">
-                                <i class="fas fa-chevron-right text-gray-400"></i>
-                                <span class="ml-1 text-sm font-medium text-gray-500 md:ml-2" id="breadcrumb-car-title">Car Details</span>
-                            </div>
-                        </li>
-                    </ol>
-                </nav>
+    <!-- Homepage Hero Section -->
+    <section class="hero-section text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Find Your Perfect Car</h1>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Discover our premium collection of vehicles for sale and rental. Quality, reliability, and exceptional service guaranteed.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <button class="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">Browse Cars</button>
+                <button class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-blue-600 transition">Learn More</button>
             </div>
         </div>
+    </section>
 
-        <!-- Car Details Content -->
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Why Choose AutoPrime?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Quality Guaranteed</h3>
+                    <p class="text-gray-600">All our vehicles undergo rigorous inspection and certification processes.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-tag text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Best Prices</h3>
+                    <p class="text-gray-600">Competitive pricing with flexible payment options for both sales and rentals.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
+                        <i class="fas fa-headset text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">24/7 Support</h3>
+                    <p class="text-gray-600">Our customer service team is available around the clock to assist you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cars Section -->
+    <section id="cars-section" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800">Featured Vehicles</h2>
+                    <p class="text-gray-600 mt-2">Explore our premium selection of cars for sale and rental</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex space-x-4">
+                    <select class="bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>All Brands</option>
+                        <option>BMW</option>
+                        <option>Mercedes</option>
+                        <option>Audi</option>
+                        <option>Toyota</option>
+                    </select>
+                    <select class="bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Car Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <!-- Car Card 1 -->
+                <div class="car-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="BMW M5" class="w-full h-48 object-cover">
+                        <span class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">For Sale</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">BMW M5 Competition</h3>
+                                <p class="text-gray-600">2022 • Sedan</p>
+                            </div>
+                            <span class="text-2xl font-bold text-blue-600">$89,999</span>
+                        </div>
+                        <div class="flex mt-4 text-gray-500">
+                            <div class="flex items-center mr-4">
+                                <i class="fas fa-tachometer-alt mr-2"></i>
+                                <span>12,345 mi</span>
+                            </div>
+                            <div class="flex items-center mr-4">
+                                <i class="fas fa-gas-pump mr-2"></i>
+                                <span>Petrol</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-cogs mr-2"></i>
+                                <span>Automatic</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex space-x-3">
+                            <button class="flex-1 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition" onclick="showCarDetails(1)">View Details</button>
+                            <button class="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Car Card 2 -->
+                <div class="car-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1563720223485-405d5aaadf5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Mercedes G-Class" class="w-full h-48 object-cover">
+                        <span class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">For Rent</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">Mercedes G-Class</h3>
+                                <p class="text-gray-600">2023 • SUV</p>
+                            </div>
+                            <span class="text-2xl font-bold text-blue-600">$199/day</span>
+                        </div>
+                        <div class="flex mt-4 text-gray-500">
+                            <div class="flex items-center mr-4">
+                                <i class="fas fa-tachometer-alt mr-2"></i>
+                                <span>8,120 mi</span>
+                            </div>
+                            <div class="flex items-center mr-4">
+                                <i class="fas fa-gas-pump mr-2"></i>
+                                <span>Diesel</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-cogs mr-2"></i>
+                                <span>Automatic</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex space-x-3">
+                            <button class="flex-1 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition" onclick="showCarDetails(2)">View Details</button>
+                            <button class="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Car Card 3 -->
+                <div class="car-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Audi e-tron" class="w-full h-48 object-cover">
+                        <span class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">For Sale</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">Audi e-tron GT</h3>
+                                <p class="text-gray-600">2023 • Electric</p>
+                            </div>
+                            <span class="text-2xl font-bold text-blue-600">$109,999</span>
+                        </div>
+                        <div class="flex mt-4 text-gray-500">
+                            <div class="flex items-center mr-4">
+                                <i class="fas fa-tachometer-alt mr-2"></i>
+                                <span>5,430 mi</span>
+                            </div>
+                            <div class="flex items-center mr-4">
+                                <i class="fas fa-bolt mr-2"></i>
+                                <span>Electric</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-cogs mr-2"></i>
+                                <span>Automatic</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex space-x-3">
+                            <button class="flex-1 bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition" onclick="showCarDetails(3)">View Details</button>
+                            <button class="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="bg-white border border-blue-600 text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-blue-50 transition">View All Vehicles</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Car Details Section (Initially Hidden) -->
+    <div id="carDetails" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 overflow-y-auto">
         <div class="container mx-auto px-4 py-8">
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden max-w-6xl mx-auto">
                 <div class="p-6 border-b border-gray-200 flex justify-between items-center">
                     <h2 class="text-2xl font-bold text-gray-800" id="detailCarTitle">Car Details</h2>
-                    <a href="index.html" class="text-gray-500 hover:text-gray-700">
+                    <button onclick="hideCarDetails()" class="text-gray-500 hover:text-gray-700">
                         <i class="fas fa-times text-xl"></i>
-                    </a>
+                    </button>
                 </div>
                 
                 <div class="p-6">
@@ -334,27 +290,6 @@
                                 <div class="car-view-thumbnail border-2 border-gray-200 rounded-lg p-1 flex-shrink-0" onclick="changeCarView('engine')">
                                     <img src="https://images.unsplash.com/photo-1603712610496-5362a0e6c8ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Engine" class="w-20 h-16 object-cover rounded-md">
                                     <p class="text-xs text-center mt-1">Engine</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Dimension Visualization -->
-                            <div class="mb-6">
-                                <h3 class="text-xl font-bold text-gray-800 mb-4">Dimension Visualization</h3>
-                                <div class="bg-gray-100 rounded-lg p-4 relative h-64 flex items-center justify-center">
-                                    <div id="dimension-view" class="dimension-view w-full h-full flex items-center justify-center">
-                                        <!-- Dimension visualization will be rendered here -->
-                                        <div class="relative">
-                                            <img id="dimension-image" src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Car Dimension" class="max-h-48 object-contain">
-                                            <div id="dimension-labels" class="absolute inset-0">
-                                                <!-- Dimension labels will be added here by JavaScript -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-center mt-4 space-x-4">
-                                    <button onclick="showDimension('front')" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Front View</button>
-                                    <button onclick="showDimension('side')" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Side View</button>
-                                    <button onclick="showDimension('top')" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Top View</button>
                                 </div>
                             </div>
                             
@@ -491,7 +426,7 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="index.html" class="hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="hover:text-white transition">Home</a></li>
                         <li><a href="#cars-section" class="hover:text-white transition">Cars for Sale</a></li>
                         <li><a href="#" class="hover:text-white transition">Cars for Rent</a></li>
                         <li><a href="#" class="hover:text-white transition">Sell Your Car</a></li>
@@ -585,28 +520,10 @@
             }
         };
 
-        // Check if we're on a car details page (simulated with URL parameter)
-        function checkPage() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const carId = urlParams.get('car');
-            
-            if (carId && cars[carId]) {
-                // Show car details page
-                document.getElementById('homepage').classList.add('hidden');
-                document.getElementById('car-details-page').classList.remove('hidden');
-                loadCarDetails(carId);
-            } else {
-                // Show homepage
-                document.getElementById('homepage').classList.remove('hidden');
-                document.getElementById('car-details-page').classList.add('hidden');
-            }
-        }
-
-        // Function to load car details
-        function loadCarDetails(carId) {
+        // Function to show car details
+        function showCarDetails(carId) {
             const car = cars[carId];
             document.getElementById('detailCarTitle').textContent = car.title;
-            document.getElementById('breadcrumb-car-title').textContent = car.title;
             document.getElementById('detailCarImage').src = car.image;
             document.getElementById('detailCarPrice').textContent = car.price;
             document.getElementById('detailCarStatus').textContent = car.status;
@@ -622,8 +539,14 @@
             document.getElementById('detailCarFuel').textContent = car.fuel;
             document.getElementById('detailCarDrivetrain').textContent = car.drivetrain;
             
-            // Initialize dimension visualization
-            showDimension('front');
+            document.getElementById('carDetails').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Function to hide car details
+        function hideCarDetails() {
+            document.getElementById('carDetails').classList.add('hidden');
+            document.body.style.overflow = 'auto';
         }
 
         // Function to change car view
@@ -641,90 +564,17 @@
             event.currentTarget.classList.remove('border-gray-200');
             event.currentTarget.classList.add('border-blue-500');
             
-            // Change main image based on view
-            const mainImage = document.getElementById('detailCarImage');
-            const thumbnailImg = event.currentTarget.querySelector('img');
-            mainImage.src = thumbnailImg.src;
+            // In a real application, you would change the main image here
+            // For this demo, we'll just show an alert
+            alert(`Switching to ${view} view. In a real application, this would change the main image.`);
         }
 
-        // Function to show dimension visualization
-        function showDimension(view) {
-            const dimensionImage = document.getElementById('dimension-image');
-            const dimensionLabels = document.getElementById('dimension-labels');
-            
-            // Clear previous labels
-            dimensionLabels.innerHTML = '';
-            
-            // Update buttons
-            const buttons = document.querySelectorAll('#dimension-view ~ div button');
-            buttons.forEach(button => {
-                if (button.textContent.includes(view.charAt(0).toUpperCase() + view.slice(1))) {
-                    button.classList.remove('bg-gray-200', 'text-gray-800');
-                    button.classList.add('bg-blue-600', 'text-white');
-                } else {
-                    button.classList.remove('bg-blue-600', 'text-white');
-                    button.classList.add('bg-gray-200', 'text-gray-800');
-                }
-            });
-            
-            if (view === 'front') {
-                dimensionImage.src = 'https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80';
-                
-                // Add dimension labels for front view
-                const widthLabel = document.createElement('div');
-                widthLabel.className = 'dimension-label';
-                widthLabel.style.top = '30%';
-                widthLabel.style.left = '10%';
-                widthLabel.textContent = 'Width: 74.9 in';
-                dimensionLabels.appendChild(widthLabel);
-                
-                const heightLabel = document.createElement('div');
-                heightLabel.className = 'dimension-label';
-                heightLabel.style.top = '10%';
-                heightLabel.style.right = '20%';
-                heightLabel.textContent = 'Height: 57.8 in';
-                dimensionLabels.appendChild(heightLabel);
-                
-            } else if (view === 'side') {
-                dimensionImage.src = 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80';
-                
-                // Add dimension labels for side view
-                const lengthLabel = document.createElement('div');
-                lengthLabel.className = 'dimension-label';
-                lengthLabel.style.top = '30%';
-                lengthLabel.style.left = '10%';
-                lengthLabel.textContent = 'Length: 196.4 in';
-                dimensionLabels.appendChild(lengthLabel);
-                
-                const heightLabel = document.createElement('div');
-                heightLabel.className = 'dimension-label';
-                heightLabel.style.top = '10%';
-                heightLabel.style.right = '20%';
-                heightLabel.textContent = 'Height: 57.8 in';
-                dimensionLabels.appendChild(heightLabel);
-                
-            } else if (view === 'top') {
-                dimensionImage.src = 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80';
-                
-                // Add dimension labels for top view
-                const lengthLabel = document.createElement('div');
-                lengthLabel.className = 'dimension-label';
-                lengthLabel.style.top = '30%';
-                lengthLabel.style.left = '10%';
-                lengthLabel.textContent = 'Length: 196.4 in';
-                dimensionLabels.appendChild(lengthLabel);
-                
-                const widthLabel = document.createElement('div');
-                widthLabel.className = 'dimension-label';
-                widthLabel.style.top = '10%';
-                widthLabel.style.right = '20%';
-                widthLabel.textContent = 'Width: 74.9 in';
-                dimensionLabels.appendChild(widthLabel);
+        // Close modal when clicking outside
+        document.getElementById('carDetails').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideCarDetails();
             }
-        }
-
-        // Initialize page based on URL
-        document.addEventListener('DOMContentLoaded', checkPage);
+        });
     </script>
 </body>
 </html>

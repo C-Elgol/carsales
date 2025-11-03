@@ -10,7 +10,7 @@ from django.templatetags.static import static
 
 from carsales.users.managers import UserManager
 
-class MedicineBaseModel(TimeStampedModel, ActivatorModel):
+class CarBaseModel(TimeStampedModel, ActivatorModel):
     """
     Name: CommuneBaseModel
     Description: Abstract base model providing a UUID primary key, soft deletion, activation status, and metadata for all models in the municipal council system.
@@ -43,7 +43,7 @@ class MedicineBaseModel(TimeStampedModel, ActivatorModel):
         return str(self.id)
 
 
-class User(AbstractBaseUser, MedicineBaseModel, PermissionsMixin):
+class User(AbstractBaseUser, CarBaseModel, PermissionsMixin):
     last_name = models.CharField(max_length=255)
     first_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)

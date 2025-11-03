@@ -11,6 +11,7 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("", include("carsales.users.urls", namespace="users")),
+    path("cars", include("carsales.cars.urls", namespace="cars")),
     # Your stuff: custom urls includes go here
     # ...
     # Media files
