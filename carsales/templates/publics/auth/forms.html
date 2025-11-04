@@ -162,6 +162,9 @@
                                 Don't have an account? 
                                 <button type="button" onclick="showSignup()" class="text-blue-600 font-medium hover:text-blue-500 ml-1">Sign up</button>
                             </p>
+                            <a href="{% url 'users:home' %}">
+                            <button type="button" class="text-blue-600 font-medium hover:text-blue-500 ml-1">Home</button>
+                            </a>
                         </div>
                     </form>
                 </div>
@@ -265,6 +268,9 @@
                                 Already have an account? 
                                 <button type="button" onclick="showLogin()" class="text-blue-600 font-medium hover:text-blue-500 ml-1">Sign in</button>
                             </p>
+                            <a href="{% url 'users:home' %}">
+                            <button type="button" class="text-blue-600 font-medium hover:text-blue-500 ml-1">Home</button>
+                            </a>
                         </div>
                     </form>
                 </div>
