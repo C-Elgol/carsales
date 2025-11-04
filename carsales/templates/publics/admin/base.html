@@ -7,7 +7,7 @@
 
 <body class="bg-gray-100">
 
-    {% include 'publics/admin/includes/_navbar.html' %}
+    
     <!-- Admin Dashboard Layout -->
     <div class="flex h-screen">
        
@@ -15,7 +15,7 @@
 
         <!-- Main Content -->
         <div class="main-content flex-1 flex flex-col overflow-hidden lg:ml-0">
-            
+            {% include 'publics/admin/includes/_navbar.html' %}
             <!-- Dashboard Content -->
             <main class="flex-1 overflow-y-auto p-4 lg:p-6">
                 {% block admin_content %}
@@ -74,7 +74,7 @@
             document.querySelector('.sidebar').classList.add('mobile-open');
         });
 
-        document.getElementById('close-sidebar').addEventListener('click', function() {
+        {% comment %} document.getElementById('close-sidebar').addEventListener('click', function() {
             document.querySelector('.sidebar').classList.remove('mobile-open');
         });
 
@@ -103,7 +103,7 @@
                     document.querySelector('.sidebar').classList.remove('mobile-open');
                 }
             });
-        });
+        }); {% endcomment %}
 
         // Initialize charts
         document.addEventListener('DOMContentLoaded', function() {
