@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoPrime | Login & Signup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .auth-container {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            min-height: 100vh;
+        }
+        .auth-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+        }
+        .social-btn {
+            transition: all 0.3s ease;
+        }
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .toggle-form {
+            transition: all 0.5s ease;
+        }
+        .car-bg {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="auth-container">
+    <!-- Header -->
+    <header class="absolute top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <i class="fas fa-car text-white text-2xl mr-2"></i>
+                    <a href="index.html" class="text-2xl font-bold text-white">AutoPrime</a>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-white hover:text-blue-200 font-medium">Home</a>
+                    <a href="#cars-section" class="text-white hover:text-blue-200 font-medium">Cars</a>
+                    <a href="#" class="text-white hover:text-blue-200 font-medium">Rentals</a>
+                    <a href="#" class="text-white hover:text-blue-200 font-medium">Sell</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Auth Container -->
+    <div class="min-h-screen flex items-center justify-center px-4 py-12">
+        <div class="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <!-- Left Side - Branding & Info -->
+            <div class="text-white text-center lg:text-left">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Find Your Perfect Car</h1>
+                <p class="text-xl mb-8 max-w-lg mx-auto lg:mx-0">Join thousands of satisfied customers who found their dream car through AutoPrime.</p>
+                
+                <div class="space-y-6 mb-8">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-white text-xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <h3 class="font-bold text-lg">Secure Platform</h3>
+                            <p class="text-blue-200">Your data is protected with bank-level security</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-bolt text-white text-xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <h3 class="font-bold text-lg">Quick Process</h3>
+                            <p class="text-blue-200">Find and purchase your car in minutes</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-headset text-white text-xl"></i>
+                        </div>
+                        <div class="text-left">
+                            <h3 class="font-bold text-lg">24/7 Support</h3>
+                            <p class="text-blue-200">Our team is always here to help you</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Auth Forms -->
+            <div class="flex justify-center">
+                <!-- Login Form -->
+                <div id="login-form" class="auth-card w-full max-w-md p-8 toggle-form">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-gray-800">Welcome Back</h2>
+                        <p class="text-gray-600 mt-2">Sign in to your AutoPrime account</p>
+                    </div>
+
+                    <form class="space-y-6">
+                        <div>
+                            <label for="login-email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                            <div class="relative">
+                                <input 
+                                    type="email" 
+                                    id="login-email" 
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="Enter your email"
+                                    required
+                                >
+                                <i class="fas fa-envelope absolute right-3 top-3 text-gray-400"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="login-password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                            <div class="relative">
+                                <input 
+                                    type="password" 
+                                    id="login-password" 
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="Enter your password"
+                                    required
+                                >
+                                <i class="fas fa-lock absolute right-3 top-3 text-gray-400"></i>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input 
+                                    type="checkbox" 
+                                    id="remember-me" 
+                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                                >
+                                <label for="remember-me" class="ml-2 block text-sm text-gray-700">Remember me</label>
+                            </div>
+                            <a href="#" class="text-sm text-blue-600 hover:text-blue-500">Forgot password?</a>
+                        </div>
+
+                        <button 
+                            type="submit" 
+                            class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition duration-300 flex items-center justify-center"
+                        >
+                            <i class="fas fa-sign-in-alt mr-2"></i> Sign In
+                        </button>
+
+                        <div class="text-center mt-6">
+                            <p class="text-gray-600">
+                                Don't have an account? 
+                                <button type="button" onclick="showSignup()" class="text-blue-600 font-medium hover:text-blue-500 ml-1">Sign up</button>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="signup-form" class="auth-card w-full max-w-md p-8 toggle-form hidden">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-gray-800">Create Account</h2>
+                        <p class="text-gray-600 mt-2">Join AutoPrime today</p>
+                    </div>
+
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="first-name" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                <input 
+                                    type="text" 
+                                    id="first-name" 
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="First name"
+                                    required
+                                >
+                            </div>
+                            <div>
+                                <label for="last-name" class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                <input 
+                                    type="text" 
+                                    id="last-name" 
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="Last name"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="signup-email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                            <div class="relative">
+                                <input 
+                                    type="email" 
+                                    id="signup-email" 
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="Enter your email"
+                                    required
+                                >
+                                <i class="fas fa-envelope absolute right-3 top-3 text-gray-400"></i>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="signup-password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                            <div class="relative">
+                                <input 
+                                    type="password" 
+                                    id="signup-password" 
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="Create a password"
+                                    required
+                                >
+                                <i class="fas fa-lock absolute right-3 top-3 text-gray-400"></i>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Must be at least 8 characters with a number and symbol</p>
+                        </div>
+
+                        <div>
+                            <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+                            <div class="relative">
+                                <input 
+                                    type="password" 
+                                    id="confirm-password" 
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="Confirm your password"
+                                    required
+                                >
+                                <i class="fas fa-lock absolute right-3 top-3 text-gray-400"></i>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <input 
+                                type="checkbox" 
+                                id="terms" 
+                                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                                required
+                            >
+                            <label for="terms" class="ml-2 block text-sm text-gray-700">
+                                I agree to the <a href="#" class="text-blue-600 hover:text-blue-500">Terms of Service</a> and <a href="#" class="text-blue-600 hover:text-blue-500">Privacy Policy</a>
+                            </label>
+                        </div>
+
+                        <button 
+                            type="submit" 
+                            class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition duration-300 flex items-center justify-center"
+                        >
+                            <i class="fas fa-user-plus mr-2"></i> Create Account
+                        </button>
+
+
+                        <div class="text-center mt-6">
+                            <p class="text-gray-600">
+                                Already have an account? 
+                                <button type="button" onclick="showLogin()" class="text-blue-600 font-medium hover:text-blue-500 ml-1">Sign in</button>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Function to show signup form
+        function showSignup() {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('signup-form').classList.remove('hidden');
+        }
+
+        // Function to show login form
+        function showLogin() {
+            document.getElementById('signup-form').classList.add('hidden');
+            document.getElementById('login-form').classList.remove('hidden');
+        }
+
+        // Form validation and submission
+        document.addEventListener('DOMContentLoaded', function() {
+            // Login form submission
+            const loginForm = document.querySelector('#login-form form');
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                // Simple validation
+                if (email && password) {
+                    // In a real application, you would send this to your backend
+                    alert('Login successful! Redirecting to dashboard...');
+                    // window.location.href = 'dashboard.html';
+                }
+            });
+
+            // Signup form submission
+            const signupForm = document.querySelector('#signup-form form');
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const firstName = document.getElementById('first-name').value;
+                const lastName = document.getElementById('last-name').value;
+                const email = document.getElementById('signup-email').value;
+                const password = document.getElementById('signup-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                const terms = document.getElementById('terms').checked;
+                
+                // Validation
+                if (!firstName || !lastName || !email || !password || !confirmPassword) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match.');
+                    return;
+                }
+                
+                if (!terms) {
+                    alert('Please agree to the Terms of Service and Privacy Policy.');
+                    return;
+                }
+                
+                if (password.length < 8) {
+                    alert('Password must be at least 8 characters long.');
+                    return;
+                }
+                
+                // In a real application, you would send this to your backend
+                alert('Account created successfully! Welcome to AutoPrime.');
+                // window.location.href = 'dashboard.html';
+            });
+
+            // Password strength indicator (basic)
+            const passwordInput = document.getElementById('signup-password');
+            if (passwordInput) {
+                passwordInput.addEventListener('input', function() {
+                    const password = this.value;
+                    const strengthIndicator = document.getElementById('password-strength');
+                    
+                    if (!strengthIndicator) {
+                        const indicator = document.createElement('div');
+                        indicator.id = 'password-strength';
+                        indicator.className = 'text-xs mt-1';
+                        this.parentNode.appendChild(indicator);
+                    }
+                    
+                    let strength = 'Weak';
+                    let color = 'text-red-500';
+                    
+                    if (password.length >= 8) {
+                        strength = 'Medium';
+                        color = 'text-yellow-500';
+                    }
+                    
+                    if (password.length >= 8 && /[0-9]/.test(password) && /[!@#$%^&*]/.test(password)) {
+                        strength = 'Strong';
+                        color = 'text-green-500';
+                    }
+                    
+                    document.getElementById('password-strength').innerHTML = `Strength: <span class="${color} font-medium">${strength}</span>`;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
