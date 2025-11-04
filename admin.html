@@ -38,21 +38,54 @@
             border-right: 3px solid #2563eb;
             color: #2563eb;
         }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .mobile-menu {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -100%;
+                z-index: 50;
+                height: 100vh;
+            }
+            .sidebar.mobile-open {
+                left: 0;
+            }
+            .mobile-menu {
+                display: flex;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100">
+    <!-- Mobile Menu Button -->
+    <div class="mobile-menu lg:hidden fixed top-4 left-4 z-50">
+        <button id="mobile-menu-toggle" class="bg-white p-2 rounded-lg shadow-md">
+            <i class="fas fa-bars text-gray-700"></i>
+        </button>
+    </div>
+
     <!-- Admin Dashboard Layout -->
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <div class="sidebar bg-white shadow-lg w-64 flex flex-col sidebar">
+        <div class="sidebar bg-white shadow-lg w-64 flex flex-col fixed lg:relative z-40 h-full">
             <!-- Logo -->
             <div class="p-6 border-b border-gray-200 flex items-center justify-between">
                 <div class="flex items-center">
                     <i class="fas fa-car text-blue-600 text-2xl mr-3"></i>
                     <span class="sidebar-text text-xl font-bold text-gray-800">AutoPrime Admin</span>
                 </div>
-                <button id="toggle-sidebar" class="text-gray-500 hover:text-gray-700">
+                <button id="toggle-sidebar" class="text-gray-500 hover:text-gray-700 hidden lg:block">
                     <i class="fas fa-bars"></i>
+                </button>
+                <button id="close-sidebar" class="text-gray-500 hover:text-gray-700 lg:hidden">
+                    <i class="fas fa-times"></i>
                 </button>
             </div>
 
@@ -71,49 +104,49 @@
             <nav class="flex-1 p-4">
                 <ul class="space-y-2">
                     <li>
-                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50 active-menu">
+                        <a href="#" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50 active-menu" data-page="dashboard">
                             <i class="fas fa-tachometer-alt w-6 text-center"></i>
                             <span class="sidebar-text ml-3 font-medium">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50">
+                        <a href="#" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50" data-page="cars">
                             <i class="fas fa-car w-6 text-center"></i>
                             <span class="sidebar-text ml-3 font-medium">Cars Management</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50">
+                        <a href="#" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50" data-page="rentals">
                             <i class="fas fa-calendar-alt w-6 text-center"></i>
                             <span class="sidebar-text ml-3 font-medium">Rentals</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50">
+                        <a href="#" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50" data-page="sales">
                             <i class="fas fa-shopping-cart w-6 text-center"></i>
                             <span class="sidebar-text ml-3 font-medium">Sales</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50">
+                        <a href="#" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50" data-page="customers">
                             <i class="fas fa-users w-6 text-center"></i>
                             <span class="sidebar-text ml-3 font-medium">Customers</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50">
+                        <a href="#" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50" data-page="dealers">
                             <i class="fas fa-user-tie w-6 text-center"></i>
                             <span class="sidebar-text ml-3 font-medium">Dealers</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50">
+                        <a href="#" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50" data-page="analytics">
                             <i class="fas fa-chart-bar w-6 text-center"></i>
                             <span class="sidebar-text ml-3 font-medium">Analytics</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50">
+                        <a href="#" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50" data-page="settings">
                             <i class="fas fa-cog w-6 text-center"></i>
                             <span class="sidebar-text ml-3 font-medium">Settings</span>
                         </a>
@@ -131,12 +164,12 @@
         </div>
 
         <!-- Main Content -->
-        <div class="main-content flex-1 flex flex-col overflow-hidden">
+        <div class="main-content flex-1 flex flex-col overflow-hidden lg:ml-0">
             <!-- Top Header -->
             <header class="bg-white shadow-sm py-4 px-6 flex items-center justify-between">
                 <div>
-                    <h1 class="text-2xl font-bold text-gray-800">Dashboard</h1>
-                    <p class="text-gray-600">Welcome back, Admin! Here's what's happening today.</p>
+                    <h1 class="text-2xl font-bold text-gray-800" id="page-title">Dashboard</h1>
+                    <p class="text-gray-600" id="page-description">Welcome back, Admin! Here's what's happening today.</p>
                 </div>
                 <div class="flex items-center space-x-4">
                     <div class="relative">
@@ -151,7 +184,7 @@
                         </button>
                         <span class="absolute top-0 right-0 w-3 h-3 bg-blue-500 rounded-full"></span>
                     </div>
-                    <div class="border-l border-gray-300 pl-4">
+                    <div class="border-l border-gray-300 pl-4 hidden sm:block">
                         <div class="flex items-center space-x-3">
                             <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
                                 <i class="fas fa-user text-blue-600"></i>
@@ -166,151 +199,288 @@
             </header>
 
             <!-- Dashboard Content -->
-            <main class="flex-1 overflow-y-auto p-6">
-                <!-- Stats Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <div class="dashboard-card bg-white rounded-xl shadow-md p-6">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-gray-500 text-sm">Total Cars</p>
-                                <h3 class="text-2xl font-bold text-gray-800 mt-1">247</h3>
-                                <p class="text-green-500 text-sm mt-2">
-                                    <i class="fas fa-arrow-up mr-1"></i> 12% from last month
-                                </p>
+            <main class="flex-1 overflow-y-auto p-4 lg:p-6">
+                
+                <!-- Dashboard Page -->
+                <div id="dashboard" class="page active">
+                    <!-- Stats Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-8">
+                        <div class="dashboard-card bg-white rounded-xl shadow-md p-4 lg:p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Total Cars</p>
+                                    <h3 class="text-xl lg:text-2xl font-bold text-gray-800 mt-1">247</h3>
+                                    <p class="text-green-500 text-sm mt-2">
+                                        <i class="fas fa-arrow-up mr-1"></i> 12% from last month
+                                    </p>
+                                </div>
+                                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-car text-blue-600 text-lg lg:text-xl"></i>
+                                </div>
                             </div>
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-car text-blue-600 text-xl"></i>
+                        </div>
+
+                        <div class="dashboard-card bg-white rounded-xl shadow-md p-4 lg:p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Active Rentals</p>
+                                    <h3 class="text-xl lg:text-2xl font-bold text-gray-800 mt-1">42</h3>
+                                    <p class="text-green-500 text-sm mt-2">
+                                        <i class="fas fa-arrow-up mr-1"></i> 5% from last week
+                                    </p>
+                                </div>
+                                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-calendar-alt text-green-600 text-lg lg:text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card bg-white rounded-xl shadow-md p-4 lg:p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">Monthly Sales</p>
+                                    <h3 class="text-xl lg:text-2xl font-bold text-gray-800 mt-1">$124,580</h3>
+                                    <p class="text-red-500 text-sm mt-2">
+                                        <i class="fas fa-arrow-down mr-1"></i> 3% from last month
+                                    </p>
+                                </div>
+                                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-shopping-cart text-purple-600 text-lg lg:text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card bg-white rounded-xl shadow-md p-4 lg:p-6">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500 text-sm">New Customers</p>
+                                    <h3 class="text-xl lg:text-2xl font-bold text-gray-800 mt-1">1,248</h3>
+                                    <p class="text-green-500 text-sm mt-2">
+                                        <i class="fas fa-arrow-up mr-1"></i> 8% from last month
+                                    </p>
+                                </div>
+                                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-users text-yellow-600 text-lg lg:text-xl"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="dashboard-card bg-white rounded-xl shadow-md p-6">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-gray-500 text-sm">Active Rentals</p>
-                                <h3 class="text-2xl font-bold text-gray-800 mt-1">42</h3>
-                                <p class="text-green-500 text-sm mt-2">
-                                    <i class="fas fa-arrow-up mr-1"></i> 5% from last week
-                                </p>
+                    <!-- Charts and Recent Activity -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 mb-6 lg:mb-8">
+                        <!-- Sales Chart -->
+                        <div class="lg:col-span-2 bg-white rounded-xl shadow-md p-4 lg:p-6">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 lg:mb-6 gap-2">
+                                <h2 class="text-lg lg:text-xl font-bold text-gray-800">Sales Overview</h2>
+                                <select class="bg-gray-100 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto">
+                                    <option>Last 7 Days</option>
+                                    <option>Last 30 Days</option>
+                                    <option>Last 3 Months</option>
+                                </select>
                             </div>
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-calendar-alt text-green-600 text-xl"></i>
+                            <div class="h-64 lg:h-80">
+                                <canvas id="salesChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="bg-white rounded-xl shadow-md p-4 lg:p-6">
+                            <h2 class="text-lg lg:text-xl font-bold text-gray-800 mb-4 lg:mb-6">Recent Activity</h2>
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-car text-blue-600 text-sm lg:text-base"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-gray-800 font-medium text-sm lg:text-base">New car added</p>
+                                        <p class="text-gray-500 text-xs lg:text-sm truncate">BMW M5 Competition was added to inventory</p>
+                                        <p class="text-gray-400 text-xs mt-1">2 hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-calendar-check text-green-600 text-sm lg:text-base"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-gray-800 font-medium text-sm lg:text-base">Rental extended</p>
+                                        <p class="text-gray-500 text-xs lg:text-sm truncate">Mercedes G-Class rental extended by 3 days</p>
+                                        <p class="text-gray-400 text-xs mt-1">5 hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-shopping-cart text-purple-600 text-sm lg:text-base"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-gray-800 font-medium text-sm lg:text-base">New sale completed</p>
+                                        <p class="text-gray-500 text-xs lg:text-sm truncate">Audi e-tron GT was sold for $109,999</p>
+                                        <p class="text-gray-400 text-xs mt-1">1 day ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 lg:w-10 lg:h-10 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-user-plus text-yellow-600 text-sm lg:text-base"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-gray-800 font-medium text-sm lg:text-base">New dealer registered</p>
+                                        <p class="text-gray-500 text-xs lg:text-sm truncate">Premium Auto Dealers joined the platform</p>
+                                        <p class="text-gray-400 text-xs mt-1">2 days ago</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="dashboard-card bg-white rounded-xl shadow-md p-6">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-gray-500 text-sm">Monthly Sales</p>
-                                <h3 class="text-2xl font-bold text-gray-800 mt-1">$124,580</h3>
-                                <p class="text-red-500 text-sm mt-2">
-                                    <i class="fas fa-arrow-down mr-1"></i> 3% from last month
-                                </p>
+                    <!-- Recent Cars and Quick Actions -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
+                        <!-- Recent Cars -->
+                        <div class="lg:col-span-2 bg-white rounded-xl shadow-md p-4 lg:p-6">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 lg:mb-6 gap-2">
+                                <h2 class="text-lg lg:text-xl font-bold text-gray-800">Recent Cars</h2>
+                                <a href="#" class="text-blue-600 hover:text-blue-800 font-medium text-sm">View All</a>
                             </div>
-                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-shopping-cart text-purple-600 text-xl"></i>
+                            <div class="overflow-x-auto">
+                                <table class="w-full min-w-[600px]">
+                                    <thead>
+                                        <tr class="text-left text-gray-500 text-sm border-b border-gray-200">
+                                            <th class="pb-3 font-medium">Car</th>
+                                            <th class="pb-3 font-medium">Status</th>
+                                            <th class="pb-3 font-medium">Price</th>
+                                            <th class="pb-3 font-medium">Date Added</th>
+                                            <th class="pb-3 font-medium">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                        <tr class="table-row">
+                                            <td class="py-3 lg:py-4">
+                                                <div class="flex items-center">
+                                                    <div class="w-10 h-10 lg:w-12 lg:h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                                                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="BMW M5" class="w-full h-full object-cover">
+                                                    </div>
+                                                    <div class="ml-3 lg:ml-4">
+                                                        <p class="font-medium text-gray-800 text-sm lg:text-base">BMW M5 Competition</p>
+                                                        <p class="text-gray-500 text-xs lg:text-sm">2022 • Sedan</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="py-3 lg:py-4">
+                                                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Available</span>
+                                            </td>
+                                            <td class="py-3 lg:py-4 font-medium text-gray-800 text-sm lg:text-base">$89,999</td>
+                                            <td class="py-3 lg:py-4 text-gray-500 text-sm">Oct 12, 2023</td>
+                                            <td class="py-3 lg:py-4">
+                                                <div class="flex space-x-2">
+                                                    <button class="text-blue-600 hover:text-blue-800 text-sm lg:text-base">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="text-red-600 hover:text-red-800 text-sm lg:text-base">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="table-row">
+                                            <td class="py-3 lg:py-4">
+                                                <div class="flex items-center">
+                                                    <div class="w-10 h-10 lg:w-12 lg:h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                                                        <img src="https://images.unsplash.com/photo-1563720223485-405d5aaadf5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Mercedes G-Class" class="w-full h-full object-cover">
+                                                    </div>
+                                                    <div class="ml-3 lg:ml-4">
+                                                        <p class="font-medium text-gray-800 text-sm lg:text-base">Mercedes G-Class</p>
+                                                        <p class="text-gray-500 text-xs lg:text-sm">2023 • SUV</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="py-3 lg:py-4">
+                                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Rented</span>
+                                            </td>
+                                            <td class="py-3 lg:py-4 font-medium text-gray-800 text-sm lg:text-base">$199/day</td>
+                                            <td class="py-3 lg:py-4 text-gray-500 text-sm">Oct 10, 2023</td>
+                                            <td class="py-3 lg:py-4">
+                                                <div class="flex space-x-2">
+                                                    <button class="text-blue-600 hover:text-blue-800 text-sm lg:text-base">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+                                                    <button class="text-red-600 hover:text-red-800 text-sm lg:text-base">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="dashboard-card bg-white rounded-xl shadow-md p-6">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-gray-500 text-sm">New Customers</p>
-                                <h3 class="text-2xl font-bold text-gray-800 mt-1">1,248</h3>
-                                <p class="text-green-500 text-sm mt-2">
-                                    <i class="fas fa-arrow-up mr-1"></i> 8% from last month
-                                </p>
+                        <!-- Quick Actions -->
+                        <div class="bg-white rounded-xl shadow-md p-4 lg:p-6">
+                            <h2 class="text-lg lg:text-xl font-bold text-gray-800 mb-4 lg:mb-6">Quick Actions</h2>
+                            <div class="space-y-3 lg:space-y-4">
+                                <button class="w-full bg-blue-600 text-white py-2 lg:py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition flex items-center justify-center text-sm lg:text-base">
+                                    <i class="fas fa-plus mr-2"></i> Add New Car
+                                </button>
+                                <button class="w-full bg-white border border-blue-600 text-blue-600 py-2 lg:py-3 px-4 rounded-lg font-medium hover:bg-blue-50 transition flex items-center justify-center text-sm lg:text-base">
+                                    <i class="fas fa-user-plus mr-2"></i> Add New Dealer
+                                </button>
+                                <button class="w-full bg-white border border-green-600 text-green-600 py-2 lg:py-3 px-4 rounded-lg font-medium hover:bg-green-50 transition flex items-center justify-center text-sm lg:text-base">
+                                    <i class="fas fa-calendar-plus mr-2"></i> Create Rental
+                                </button>
+                                <button class="w-full bg-white border border-purple-600 text-purple-600 py-2 lg:py-3 px-4 rounded-lg font-medium hover:bg-purple-50 transition flex items-center justify-center text-sm lg:text-base">
+                                    <i class="fas fa-chart-bar mr-2"></i> Generate Report
+                                </button>
                             </div>
-                            <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-users text-yellow-600 text-xl"></i>
+
+                            <!-- System Status -->
+                            <div class="mt-6 lg:mt-8">
+                                <h3 class="text-base lg:text-lg font-bold text-gray-800 mb-3 lg:mb-4">System Status</h3>
+                                <div class="space-y-2 lg:space-y-3">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600 text-sm lg:text-base">Server Load</span>
+                                        <span class="text-green-600 font-medium text-sm lg:text-base">24%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-green-600 h-2 rounded-full" style="width: 24%"></div>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600 text-sm lg:text-base">Database</span>
+                                        <span class="text-green-600 font-medium text-sm lg:text-base">Online</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-600 text-sm lg:text-base">Last Backup</span>
+                                        <span class="text-gray-600 text-sm lg:text-base">Today, 02:00 AM</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Charts and Recent Activity -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                    <!-- Sales Chart -->
-                    <div class="lg:col-span-2 bg-white rounded-xl shadow-md p-6">
-                        <div class="flex justify-between items-center mb-6">
-                            <h2 class="text-xl font-bold text-gray-800">Sales Overview</h2>
-                            <select class="bg-gray-100 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                <option>Last 7 Days</option>
-                                <option>Last 30 Days</option>
-                                <option>Last 3 Months</option>
-                            </select>
+                <!-- Cars Management Page -->
+                <div id="cars" class="page">
+                    <div class="bg-white rounded-xl shadow-md p-4 lg:p-6">
+                        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 gap-4">
+                            <div>
+                                <h2 class="text-xl lg:text-2xl font-bold text-gray-800">Cars Management</h2>
+                                <p class="text-gray-600 mt-1">Manage your car inventory and listings</p>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                                <input type="text" placeholder="Search cars..." class="bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full lg:w-64">
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition flex items-center justify-center">
+                                    <i class="fas fa-plus mr-2"></i> Add New Car
+                                </button>
+                            </div>
                         </div>
-                        <div class="h-80">
-                            <canvas id="salesChart"></canvas>
-                        </div>
-                    </div>
 
-                    <!-- Recent Activity -->
-                    <div class="bg-white rounded-xl shadow-md p-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-6">Recent Activity</h2>
-                        <div class="space-y-4">
-                            <div class="flex items-start space-x-3">
-                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-car text-blue-600"></i>
-                                </div>
-                                <div>
-                                    <p class="text-gray-800 font-medium">New car added</p>
-                                    <p class="text-gray-500 text-sm">BMW M5 Competition was added to inventory</p>
-                                    <p class="text-gray-400 text-xs mt-1">2 hours ago</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-3">
-                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-calendar-check text-green-600"></i>
-                                </div>
-                                <div>
-                                    <p class="text-gray-800 font-medium">Rental extended</p>
-                                    <p class="text-gray-500 text-sm">Mercedes G-Class rental extended by 3 days</p>
-                                    <p class="text-gray-400 text-xs mt-1">5 hours ago</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-3">
-                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-shopping-cart text-purple-600"></i>
-                                </div>
-                                <div>
-                                    <p class="text-gray-800 font-medium">New sale completed</p>
-                                    <p class="text-gray-500 text-sm">Audi e-tron GT was sold for $109,999</p>
-                                    <p class="text-gray-400 text-xs mt-1">1 day ago</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start space-x-3">
-                                <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-user-plus text-yellow-600"></i>
-                                </div>
-                                <div>
-                                    <p class="text-gray-800 font-medium">New dealer registered</p>
-                                    <p class="text-gray-500 text-sm">Premium Auto Dealers joined the platform</p>
-                                    <p class="text-gray-400 text-xs mt-1">2 days ago</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Cars and Quick Actions -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Recent Cars -->
-                    <div class="lg:col-span-2 bg-white rounded-xl shadow-md p-6">
-                        <div class="flex justify-between items-center mb-6">
-                            <h2 class="text-xl font-bold text-gray-800">Recent Cars</h2>
-                            <a href="#" class="text-blue-600 hover:text-blue-800 font-medium text-sm">View All</a>
-                        </div>
+                        <!-- Cars Table -->
                         <div class="overflow-x-auto">
-                            <table class="w-full">
+                            <table class="w-full min-w-[800px]">
                                 <thead>
                                     <tr class="text-left text-gray-500 text-sm border-b border-gray-200">
-                                        <th class="pb-3 font-medium">Car</th>
+                                        <th class="pb-3 font-medium">Car Details</th>
+                                        <th class="pb-3 font-medium">Type</th>
                                         <th class="pb-3 font-medium">Status</th>
                                         <th class="pb-3 font-medium">Price</th>
-                                        <th class="pb-3 font-medium">Date Added</th>
+                                        <th class="pb-3 font-medium">Views</th>
                                         <th class="pb-3 font-medium">Actions</th>
                                     </tr>
                                 </thead>
@@ -328,14 +498,20 @@
                                             </div>
                                         </td>
                                         <td class="py-4">
+                                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">For Sale</span>
+                                        </td>
+                                        <td class="py-4">
                                             <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Available</span>
                                         </td>
                                         <td class="py-4 font-medium text-gray-800">$89,999</td>
-                                        <td class="py-4 text-gray-500">Oct 12, 2023</td>
+                                        <td class="py-4 text-gray-500">1,247</td>
                                         <td class="py-4">
                                             <div class="flex space-x-2">
                                                 <button class="text-blue-600 hover:text-blue-800">
                                                     <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="text-green-600 hover:text-green-800">
+                                                    <i class="fas fa-eye"></i>
                                                 </button>
                                                 <button class="text-red-600 hover:text-red-800">
                                                     <i class="fas fa-trash"></i>
@@ -343,117 +519,189 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr class="table-row">
-                                        <td class="py-4">
-                                            <div class="flex items-center">
-                                                <div class="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
-                                                    <img src="https://images.unsplash.com/photo-1563720223485-405d5aaadf5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Mercedes G-Class" class="w-full h-full object-cover">
-                                                </div>
-                                                <div class="ml-4">
-                                                    <p class="font-medium text-gray-800">Mercedes G-Class</p>
-                                                    <p class="text-gray-500 text-sm">2023 • SUV</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="py-4">
-                                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Rented</span>
-                                        </td>
-                                        <td class="py-4 font-medium text-gray-800">$199/day</td>
-                                        <td class="py-4 text-gray-500">Oct 10, 2023</td>
-                                        <td class="py-4">
-                                            <div class="flex space-x-2">
-                                                <button class="text-blue-600 hover:text-blue-800">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="text-red-600 hover:text-red-800">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td class="py-4">
-                                            <div class="flex items-center">
-                                                <div class="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
-                                                    <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Audi e-tron" class="w-full h-full object-cover">
-                                                </div>
-                                                <div class="ml-4">
-                                                    <p class="font-medium text-gray-800">Audi e-tron GT</p>
-                                                    <p class="text-gray-500 text-sm">2023 • Electric</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="py-4">
-                                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Sold</span>
-                                        </td>
-                                        <td class="py-4 font-medium text-gray-800">$109,999</td>
-                                        <td class="py-4 text-gray-500">Oct 5, 2023</td>
-                                        <td class="py-4">
-                                            <div class="flex space-x-2">
-                                                <button class="text-blue-600 hover:text-blue-800">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="text-red-600 hover:text-red-800">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <!-- More car rows would go here -->
                                 </tbody>
                             </table>
                         </div>
-                    </div>
 
-                    <!-- Quick Actions -->
-                    <div class="bg-white rounded-xl shadow-md p-6">
-                        <h2 class="text-xl font-bold text-gray-800 mb-6">Quick Actions</h2>
-                        <div class="space-y-4">
-                            <button class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition flex items-center justify-center">
-                                <i class="fas fa-plus mr-2"></i> Add New Car
-                            </button>
-                            <button class="w-full bg-white border border-blue-600 text-blue-600 py-3 px-4 rounded-lg font-medium hover:bg-blue-50 transition flex items-center justify-center">
-                                <i class="fas fa-user-plus mr-2"></i> Add New Dealer
-                            </button>
-                            <button class="w-full bg-white border border-green-600 text-green-600 py-3 px-4 rounded-lg font-medium hover:bg-green-50 transition flex items-center justify-center">
-                                <i class="fas fa-calendar-plus mr-2"></i> Create Rental
-                            </button>
-                            <button class="w-full bg-white border border-purple-600 text-purple-600 py-3 px-4 rounded-lg font-medium hover:bg-purple-50 transition flex items-center justify-center">
-                                <i class="fas fa-chart-bar mr-2"></i> Generate Report
-                            </button>
-                        </div>
-
-                        <!-- System Status -->
-                        <div class="mt-8">
-                            <h3 class="text-lg font-bold text-gray-800 mb-4">System Status</h3>
-                            <div class="space-y-3">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-gray-600">Server Load</span>
-                                    <span class="text-green-600 font-medium">24%</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2">
-                                    <div class="bg-green-600 h-2 rounded-full" style="width: 24%"></div>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-gray-600">Database</span>
-                                    <span class="text-green-600 font-medium">Online</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-gray-600">Last Backup</span>
-                                    <span class="text-gray-600">Today, 02:00 AM</span>
-                                </div>
+                        <!-- Pagination -->
+                        <div class="flex justify-between items-center mt-6">
+                            <p class="text-gray-600 text-sm">Showing 1 to 10 of 247 cars</p>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg text-sm">Previous</button>
+                                <button class="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm">1</button>
+                                <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg text-sm">2</button>
+                                <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg text-sm">3</button>
+                                <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded-lg text-sm">Next</button>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Rentals Page -->
+                <div id="rentals" class="page">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Rentals Management</h2>
+                        <p class="text-gray-600 mb-6">Manage car rentals and bookings</p>
+                        <!-- Rental management content would go here -->
+                        <div class="text-center py-12">
+                            <i class="fas fa-calendar-alt text-4xl text-gray-300 mb-4"></i>
+                            <h3 class="text-xl font-medium text-gray-600">Rentals Management</h3>
+                            <p class="text-gray-500 mt-2">This page is under development</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sales Page -->
+                <div id="sales" class="page">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Sales Management</h2>
+                        <p class="text-gray-600 mb-6">Track and manage car sales</p>
+                        <!-- Sales management content would go here -->
+                        <div class="text-center py-12">
+                            <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-4"></i>
+                            <h3 class="text-xl font-medium text-gray-600">Sales Management</h3>
+                            <p class="text-gray-500 mt-2">This page is under development</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customers Page -->
+                <div id="customers" class="page">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Customers Management</h2>
+                        <p class="text-gray-600 mb-6">Manage customer accounts and information</p>
+                        <!-- Customer management content would go here -->
+                        <div class="text-center py-12">
+                            <i class="fas fa-users text-4xl text-gray-300 mb-4"></i>
+                            <h3 class="text-xl font-medium text-gray-600">Customers Management</h3>
+                            <p class="text-gray-500 mt-2">This page is under development</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dealers Page -->
+                <div id="dealers" class="page">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Dealers Management</h2>
+                        <p class="text-gray-600 mb-6">Manage dealer accounts and partnerships</p>
+                        <!-- Dealer management content would go here -->
+                        <div class="text-center py-12">
+                            <i class="fas fa-user-tie text-4xl text-gray-300 mb-4"></i>
+                            <h3 class="text-xl font-medium text-gray-600">Dealers Management</h3>
+                            <p class="text-gray-500 mt-2">This page is under development</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Page -->
+                <div id="analytics" class="page">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Analytics & Reports</h2>
+                        <p class="text-gray-600 mb-6">View detailed analytics and generate reports</p>
+                        <!-- Analytics content would go here -->
+                        <div class="text-center py-12">
+                            <i class="fas fa-chart-bar text-4xl text-gray-300 mb-4"></i>
+                            <h3 class="text-xl font-medium text-gray-600">Analytics & Reports</h3>
+                            <p class="text-gray-500 mt-2">This page is under development</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Page -->
+                <div id="settings" class="page">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">System Settings</h2>
+                        <p class="text-gray-600 mb-6">Configure system preferences and options</p>
+                        <!-- Settings content would go here -->
+                        <div class="text-center py-12">
+                            <i class="fas fa-cog text-4xl text-gray-300 mb-4"></i>
+                            <h3 class="text-xl font-medium text-gray-600">System Settings</h3>
+                            <p class="text-gray-500 mt-2">This page is under development</p>
+                        </div>
+                    </div>
+                </div>
+
             </main>
         </div>
     </div>
 
     <script>
+        // Page titles and descriptions
+        const pageInfo = {
+            dashboard: {
+                title: "Dashboard",
+                description: "Welcome back, Admin! Here's what's happening today."
+            },
+            cars: {
+                title: "Cars Management",
+                description: "Manage your car inventory and listings"
+            },
+            rentals: {
+                title: "Rentals Management",
+                description: "Manage car rentals and bookings"
+            },
+            sales: {
+                title: "Sales Management",
+                description: "Track and manage car sales"
+            },
+            customers: {
+                title: "Customers Management",
+                description: "Manage customer accounts and information"
+            },
+            dealers: {
+                title: "Dealers Management",
+                description: "Manage dealer accounts and partnerships"
+            },
+            analytics: {
+                title: "Analytics & Reports",
+                description: "View detailed analytics and generate reports"
+            },
+            settings: {
+                title: "System Settings",
+                description: "Configure system preferences and options"
+            }
+        };
+
         // Toggle sidebar
         document.getElementById('toggle-sidebar').addEventListener('click', function() {
             document.querySelector('.sidebar').classList.toggle('collapsed');
-            document.querySelector('.main-content').classList.toggle('lg:ml-64');
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.add('mobile-open');
+        });
+
+        document.getElementById('close-sidebar').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.remove('mobile-open');
+        });
+
+        // Page navigation
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all menu items and pages
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active-menu'));
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                
+                // Add active class to clicked menu item
+                this.classList.add('active-menu');
+                
+                // Show corresponding page
+                const pageId = this.getAttribute('data-page');
+                document.getElementById(pageId).classList.add('active');
+                
+                // Update page title and description
+                document.getElementById('page-title').textContent = pageInfo[pageId].title;
+                document.getElementById('page-description').textContent = pageInfo[pageId].description;
+                
+                // Close mobile sidebar if open
+                if (window.innerWidth < 1024) {
+                    document.querySelector('.sidebar').classList.remove('mobile-open');
+                }
+            });
         });
 
         // Initialize charts
@@ -505,16 +753,19 @@
                     }
                 }
             });
+        });
 
-            // Add active class to menu items on click
-            const menuItems = document.querySelectorAll('nav a');
-            menuItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    menuItems.forEach(i => i.classList.remove('active-menu'));
-                    this.classList.add('active-menu');
-                });
-            });
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+            const sidebar = document.querySelector('.sidebar');
+            const mobileMenu = document.getElementById('mobile-menu-toggle');
+            
+            if (window.innerWidth < 1024 && 
+                !sidebar.contains(e.target) && 
+                !mobileMenu.contains(e.target) &&
+                sidebar.classList.contains('mobile-open')) {
+                sidebar.classList.remove('mobile-open');
+            }
         });
     </script>
 </body>

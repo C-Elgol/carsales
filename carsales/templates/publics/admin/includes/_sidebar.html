@@ -1,0 +1,89 @@
+ <!-- Sidebar -->
+        <div class="sidebar bg-white shadow-lg w-64 flex flex-col fixed lg:relative z-40 h-full">
+            <!-- Logo -->
+            <div class="p-6 border-b border-gray-200 flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-car text-blue-600 text-2xl mr-3"></i>
+                    <span class="sidebar-text text-xl font-bold text-gray-800">AutoPrime Admin</span>
+                </div>
+                <button id="toggle-sidebar" class="text-gray-500 hover:text-gray-700 hidden lg:block">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <button id="close-sidebar" class="text-gray-500 hover:text-gray-700 lg:hidden">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- User Profile -->
+            <div class="p-6 border-b border-gray-200 flex items-center space-x-4">
+                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-blue-600"></i>
+                </div>
+                <div class="sidebar-text">
+                    <p class="font-medium text-gray-800">Admin User</p>
+                    <p class="text-sm text-gray-500">Administrator</p>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <nav class="flex-1 p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="{% url 'administration:admin_dashboard' %}" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50 active-menu" data-page="dashboard">
+                            <i class="fas fa-tachometer-alt w-6 text-center"></i>
+                            <span class="sidebar-text ml-3 font-medium">Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'administration:car_management' %}" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50" data-page="cars">
+                            <i class="fas fa-car w-6 text-center"></i>
+                            <span class="sidebar-text ml-3 font-medium">Cars Management</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'administration:customer' %}" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50" data-page="rentals">
+                            <i class="fas fa-calendar-alt w-6 text-center"></i>
+                            <span class="sidebar-text ml-3 font-medium">Rentals</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50" data-page="sales">
+                            <i class="fas fa-shopping-cart w-6 text-center"></i>
+                            <span class="sidebar-text ml-3 font-medium">Sales</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'administration:customer' %}" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50" data-page="customers">
+                            <i class="fas fa-users w-6 text-center"></i>
+                            <span class="sidebar-text ml-3 font-medium">Customers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50" data-page="dealers">
+                            <i class="fas fa-user-tie w-6 text-center"></i>
+                            <span class="sidebar-text ml-3 font-medium">Dealers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50" data-page="analytics">
+                            <i class="fas fa-chart-bar w-6 text-center"></i>
+                            <span class="sidebar-text ml-3 font-medium">Analytics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'administration:setting' %}" class="menu-item flex items-center p-3 text-gray-700 rounded-lg hover:bg-blue-50" data-page="settings">
+                            <i class="fas fa-cog w-6 text-center"></i>
+                            <span class="sidebar-text ml-3 font-medium">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Logout -->
+            <div class="p-4 border-t border-gray-200">
+                <a href="#" class="flex items-center p-3 text-gray-700 rounded-lg hover:bg-red-50 hover:text-red-600">
+                    <i class="fas fa-sign-out-alt w-6 text-center"></i>
+                    <span class="sidebar-text ml-3 font-medium">Logout</span>
+                </a>
+            </div>
+        </div>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include  'publics/admin/includes/_head.html' %}
+    {% comment %} <script src="{% url 'javascript_catalog' %}"></script> {% endcomment %}
+</head>
+
+<body class="bg-gray-100">
+
+    {% include 'publics/admin/includes/_navbar.html' %}
+    <!-- Admin Dashboard Layout -->
+    <div class="flex h-screen">
+       
+        {% include 'publics/admin/includes/_sidebar.html' %}
+
+        <!-- Main Content -->
+        <div class="main-content flex-1 flex flex-col overflow-hidden lg:ml-0">
+            
+            <!-- Dashboard Content -->
+            <main class="flex-1 overflow-y-auto p-4 lg:p-6">
+                {% block admin_content %}
+
+                {% endblock admin_content%}
+
+            </main>
+        </div>
+    </div>
+{% include 'publics/home/includes/_js.html' %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        // Page titles and descriptions
+        const pageInfo = {
+            dashboard: {
+                title: "Dashboard",
+                description: "Welcome back, Admin! Here's what's happening today."
+            },
+            cars: {
+                title: "Cars Management",
+                description: "Manage your car inventory and listings"
+            },
+            rentals: {
+                title: "Rentals Management",
+                description: "Manage car rentals and bookings"
+            },
+            sales: {
+                title: "Sales Management",
+                description: "Track and manage car sales"
+            },
+            customers: {
+                title: "Customers Management",
+                description: "Manage customer accounts and information"
+            },
+            dealers: {
+                title: "Dealers Management",
+                description: "Manage dealer accounts and partnerships"
+            },
+            analytics: {
+                title: "Analytics & Reports",
+                description: "View detailed analytics and generate reports"
+            },
+            settings: {
+                title: "System Settings",
+                description: "Configure system preferences and options"
+            }
+        };
+
+        // Toggle sidebar
+        document.getElementById('toggle-sidebar').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('collapsed');
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.add('mobile-open');
+        });
+
+        document.getElementById('close-sidebar').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.remove('mobile-open');
+        });
+
+        // Page navigation
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all menu items and pages
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active-menu'));
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                
+                // Add active class to clicked menu item
+                this.classList.add('active-menu');
+                
+                // Show corresponding page
+                const pageId = this.getAttribute('data-page');
+                document.getElementById(pageId).classList.add('active');
+                
+                // Update page title and description
+                document.getElementById('page-title').textContent = pageInfo[pageId].title;
+                document.getElementById('page-description').textContent = pageInfo[pageId].description;
+                
+                // Close mobile sidebar if open
+                if (window.innerWidth < 1024) {
+                    document.querySelector('.sidebar').classList.remove('mobile-open');
+                }
+            });
+        });
+
+        // Initialize charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sales Chart
+            const salesCtx = document.getElementById('salesChart').getContext('2d');
+            const salesChart = new Chart(salesCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                    datasets: [{
+                        label: 'Car Sales',
+                        data: [65, 78, 66, 82, 95, 87, 102, 94, 110, 98],
+                        borderColor: '#2563eb',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Rental Revenue',
+                        data: [45, 52, 68, 74, 65, 82, 90, 88, 95, 102],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                drawBorder: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+            const sidebar = document.querySelector('.sidebar');
+            const mobileMenu = document.getElementById('mobile-menu-toggle');
+            
+            if (window.innerWidth < 1024 && 
+                !sidebar.contains(e.target) && 
+                !mobileMenu.contains(e.target) &&
+                sidebar.classList.contains('mobile-open')) {
+                sidebar.classList.remove('mobile-open');
+            }
+        });
+    </script>
+</body>
+</html>
